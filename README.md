@@ -14,6 +14,8 @@ All projects are built for learning, experimentation, visualization, and portfol
 
 An AI-powered smart-city perception system that transforms traffic, CCTV, drone, or dashcam footage into real-time urban intelligence.
 
+![Urban Digital Twin Perception Dashboard](Urban%20Digital%20Twin%20Perception/perception_dashboard.png)
+
 ### Features
 
 * Vehicle detection
@@ -40,6 +42,8 @@ python urban_digital_twin.py
 
 A motorsport analytics platform that analyzes race footage and generates real-time racing intelligence.
 
+![Formula 1 Race Dashboard](f1/race_dashboard.png)
+
 ### Features
 
 * Race car detection
@@ -65,6 +69,8 @@ python formula1_race_intelligence.py
 ### Overview
 
 A computer vision platform for detecting, tracking, and analyzing drone activity from a single camera feed.
+
+![Drone Airspace Perception Dashboard](Autonomous%20Drone%20Airspace/perception_dashboard.png)
 
 ### Features
 
