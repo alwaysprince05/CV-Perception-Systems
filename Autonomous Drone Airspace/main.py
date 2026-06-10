@@ -2,7 +2,7 @@
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║          MONOCULAR 3D VEHICLE PERCEPTION SYSTEM                             ║
 ║          Tesla-Inspired Autonomous Driving Perception                       ║
-║          Dev/Creator : tubakhxn | github.com/tubakhxn                      ║
+║          Dev/Creator : alwaysprince05 | github.com/alwaysprince05                      ║
 ║          Research & Educational Purposes Only                               ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 """
@@ -78,7 +78,7 @@ from collections import defaultdict, deque
 BANNER = """
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║   MONOCULAR 3D VEHICLE PERCEPTION SYSTEM  v1.0                             ║
-║   Dev/Creator : tubakhxn | github.com/tubakhxn                            ║
+║   Dev/Creator : alwaysprince05 | github.com/alwaysprince05                            ║
 ║   Research & Educational Purposes Only                                      ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 """
@@ -403,7 +403,7 @@ def draw_analytics_bar(img, tracks, frame_no, fps, risk_score):
         (f"TRACKS: {len(tracks)}", NEON_CYAN),
         (f"FPS: {fps:.1f}", NEON_GREEN),
         (f"FRAME: {frame_no}", (120,120,120)),
-        ("tubakhxn", (60,80,60)),
+        ("alwaysprince05", (60,80,60)),
     ]
     col_w = w // len(stats)
     for i, (txt, col) in enumerate(stats):
@@ -547,7 +547,7 @@ def build_3d_panel(tracks, depth_map, panel_w, panel_h):
     closest = min((t.dist for t in tracks), default=0.0)
     ax2.text(0.02, 0.5, f"VEHICLES: {n_v}   CLOSEST: {closest:.1f}m   TRACKS: {n_v}",
              color=(0,1,0.5), fontsize=7, va='center', transform=ax2.transAxes)
-    ax2.text(0.98, 0.5, "3D PERCEPTION | tubakhxn",
+    ax2.text(0.98, 0.5, "3D PERCEPTION | alwaysprince05",
              color=(0.3,0.5,0.3), fontsize=6, va='center', ha='right',
              transform=ax2.transAxes)
 
@@ -735,7 +735,7 @@ def process_video(input_path: str):
         print("[DONE] Wrote depth_map.png")
 
     print("\n╔══════════════════════════════════════════════════════╗")
-    print("║  All outputs saved.  tubakhxn / github.com/tubakhxn ║")
+    print("║  All outputs saved.  alwaysprince05 / github.com/alwaysprince05 ║")
     print("╚══════════════════════════════════════════════════════╝\n")
 
 

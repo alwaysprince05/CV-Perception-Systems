@@ -2,7 +2,7 @@
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║        FORMULA 1 RACE INTELLIGENCE SYSTEM  v1.0                            ║
 ║        AI-Powered Motorsport Analytics Platform                             ║
-║        Dev/Creator : tubakhxn | github.com/tubakhxn                       ║
+║        Dev/Creator : alwaysprince05 | github.com/alwaysprince05                       ║
 ║        Research & Educational Purposes Only                                 ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 """
@@ -75,7 +75,7 @@ from ultralytics import YOLO
 BANNER = """
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║   FORMULA 1 RACE INTELLIGENCE SYSTEM  v1.0                                ║
-║   Dev/Creator : tubakhxn | github.com/tubakhxn                           ║
+║   Dev/Creator : alwaysprince05 | github.com/alwaysprince05                           ║
 ║   Research & Educational Purposes Only                                      ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 """
@@ -340,7 +340,7 @@ class TrackHeatmap:
         # Add title
         cv2.putText(out,"TRACK ACTIVITY HEATMAP",(12,34),
                     cv2.FONT_HERSHEY_SIMPLEX,0.9,C_NEON_Y,2,cv2.LINE_AA)
-        cv2.putText(out,"tubakhxn | github.com/tubakhxn",(12,out.shape[0]-14),
+        cv2.putText(out,"alwaysprince05 | github.com/alwaysprince05",(12,out.shape[0]-14),
                     cv2.FONT_HERSHEY_SIMPLEX,0.42,(80,120,80),1,cv2.LINE_AA)
         cv2.imwrite(path, out)
 
@@ -546,7 +546,7 @@ def build_analytics_panel(cars, tracker, frame_no, fps, panel_w, panel_h):
                     color=col, fontsize=9.5, fontweight='bold', fontfamily='monospace')
 
     # ── Title bar ─────────────────────────────────────────────────────────────
-    fig.text(0.5, 0.975, "F1 RACE INTELLIGENCE  |  tubakhxn",
+    fig.text(0.5, 0.975, "F1 RACE INTELLIGENCE  |  alwaysprince05",
              ha='center', color=(0.15,0.85,0.4), fontsize=7.5,
              fontfamily='monospace', transform=fig.transFigure)
 
@@ -582,7 +582,7 @@ def draw_analytics_bar(img, cars, tracker, frame_no, fps):
         (f"INTENSITY: {intensity}%",risk_col),
         (f"AVG SPD: {avg_spd:.1f}", C_CYAN),
         (f"FPS: {fps:.1f}",         C_NEON_G),
-        ("tubakhxn",                (50,80,50)),
+        ("alwaysprince05",                (50,80,50)),
     ]
     col_w = w // len(stats)
     for i,(txt,col) in enumerate(stats):
@@ -658,7 +658,7 @@ def save_race_dashboard(frame, cars, tracker, frame_no, out_path):
         ax_kpi.text(xi+0.005,0.28,val,transform=ax_kpi.transAxes,
                     color=col,fontsize=11,fontweight='bold',fontfamily='monospace')
 
-    fig.suptitle("FORMULA 1 RACE INTELLIGENCE SYSTEM  |  tubakhxn / github.com/tubakhxn",
+    fig.suptitle("FORMULA 1 RACE INTELLIGENCE SYSTEM  |  alwaysprince05 / github.com/alwaysprince05",
                  color=(0.1,0.85,0.4), fontsize=10, fontfamily='monospace', y=0.97)
 
     fig.savefig(out_path, bbox_inches='tight', facecolor=fig.get_facecolor())
@@ -805,7 +805,7 @@ def process_video(input_path):
     print("[DONE] Wrote race_heatmap.png")
 
     print("\n╔═══════════════════════════════════════════════════════╗")
-    print("║  All outputs saved.  tubakhxn / github.com/tubakhxn  ║")
+    print("║  All outputs saved.  alwaysprince05 / github.com/alwaysprince05  ║")
     print("╚═══════════════════════════════════════════════════════╝\n")
 
 

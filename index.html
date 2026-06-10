@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Perception Systems Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0c10;
+            --surface-color: rgba(31, 40, 51, 0.6);
+            --primary-accent: #45f3ff;
+            --secondary-accent: #ff4572;
+            --text-main: #ffffff;
+            --text-muted: #8a9bb2;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 15% 50%, rgba(69, 243, 255, 0.08), transparent 25%),
+                              radial-gradient(circle at 85% 30%, rgba(255, 69, 114, 0.08), transparent 25%);
+        }
+
+        header {
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0 0 1rem;
+            background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--surface-color);
+            border-radius: 24px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 24px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(69, 243, 255, 0.3), rgba(255, 69, 114, 0.3));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-img-container {
+            width: 100%;
+            height: 220px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .card:hover .card-img-container img {
+            transform: scale(1.05);
+        }
+
+        .card h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            margin: 0 0 0.5rem;
+            color: #fff;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0 0 1.5rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--primary-accent);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(69, 243, 255, 0.2);
+        }
+        
+        .tag.yolo {
+            color: var(--secondary-accent);
+            border-color: rgba(255, 69, 114, 0.2);
+        }
+
+        /* Modal styling */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #151b22;
+            padding: 10px;
+            border-radius: 16px;
+            max-width: 90vw;
+            max-height: 90vh;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 40px;
+            height: 40px;
+            background: var(--secondary-accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(255, 69, 114, 0.4);
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            header { padding: 3rem 1rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>CV Perception Systems</h1>
+        <p>AI-Powered Visual Intelligence & Analytics Dashboards</p>
+    </header>
+
+    <div class="container">
+        <div class="project-grid">
+            
+            <!-- F1 -->
+            <div class="card" onclick="openModal('f1/race_dashboard.png')">
+                <div class="card-img-container">
+                    <img src="f1/race_dashboard.png" alt="Formula 1 Dashboard" onerror="this.src='https://images.unsplash.com/photo-1532906806540-3eb8e78be327?auto=format&fit=crop&w=800&q=80'">
+                </div>
+                <h2>Formula 1 Intelligence</h2>
+                <p>Analyzes race footage to generate real-time racing intelligence, track positions, speed estimation, and overtaking prediction.</p>
+                <div class="tags">
+                    <span class="tag">OpenCV</span>
+                    <span class="tag yolo">YOLOv8</span>
+                    <span class="tag">Analytics</span>
+                </div>
+            </div>
+
+            <!-- Urban -->
+            <div class="card" onclick="openModal('Urban Digital Twin Perception/perception_dashboard.png')">
+                <div class="card-img-container">
+                    <img src="Urban Digital Twin Perception/perception_dashboard.png" alt="Urban Perception" onerror="this.src='https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=800&q=80'">
+                </div>
+                <h2>Urban Digital Twin</h2>
+                <p>Transforms traffic, CCTV, and drone footage into real-time urban intelligence for smart-city management and tracking.</p>
+                <div class="tags">
+                    <span class="tag">Multi-object Tracking</span>
+                    <span class="tag yolo">YOLOv8</span>
+                    <span class="tag">Heatmaps</span>
+                </div>
+            </div>
+
+            <!-- Drone -->
+            <div class="card" onclick="openModal('Autonomous Drone Airspace/perception_dashboard.png')">
+                <div class="card-img-container">
+                    <img src="Autonomous Drone Airspace/perception_dashboard.png" alt="Drone Airspace" onerror="this.src='https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80'">
+                </div>
+                <h2>Drone Airspace Monitor</h2>
+                <p>Detects, tracks, and analyzes drone activity from camera feeds to monitor airspace risks and flight paths.</p>
+                <div class="tags">
+                    <span class="tag">Trajectory Prediction</span>
+                    <span class="tag yolo">YOLOv8</span>
+                    <span class="tag">PyTorch</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal for full size images -->
+    <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <img id="modal-img" src="" alt="Full size view">
+        </div>
+    </div>
+
+    <script>
+        function openModal(imgSrc) {
+            const modal = document.getElementById('modal');
+            const modalImg = document.getElementById('modal-img');
+            modalImg.src = imgSrc;
+            modal.classList.add('active');
+        }
+
+        function closeModal(e) {
+            if (e && e.target !== document.getElementById('modal') && e.type !== 'click') return;
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+        }
+
+        // Add subtle parallax to background
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            document.body.style.backgroundPosition = `${x * 20}px ${y * 20}px`;
+        });
+    </script>
+</body>
+</html>
